@@ -31,7 +31,7 @@ async function handle(conn) {
 async function handleReq(req) {
 	const upgrade = req.headers.get('upgrade') || '';
 	if (upgrade.toLowerCase() === 'websocket') {
-		const { socket, response } = Deno.upgradeWebSocket(req);
+		const { socket, response } = Deno.upgradeWebSocket(req, {idleTimeout: 0});
 		socket.onopen = e => console.log;
 		socket.onclose = e => console.log;
 		socket.onerror = e => console.error;
